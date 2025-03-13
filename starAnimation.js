@@ -20,8 +20,6 @@ function easeInOutCubic(t) {
 // Animate adding points onClick
 // -----------------------------
 function onClick(star) {
-  console.log("Starting 5-second point addition...");
-
   const startPoints = star.circle.points.length;
   const totalToAdd = 200;
   const duration = 5000;
