@@ -26,7 +26,10 @@ export class Fractal {
   }
 
   rotateTo(angle) {
-    const diff = shortestAngleBetween(this.basePoint.targetTheta, angle);
+    const diff = shortestAngleBetween(
+      this.basePoint.targetTheta % (2 * Math.PI),
+      angle % (2 * Math.PI),
+    );
     this.basePoint.rotateTo(diff);
     const childAngle = this.basePoint.targetTheta + diff;
     for (let child of this.children) {
@@ -36,6 +39,9 @@ export class Fractal {
 
   setColor(color) {
     this.color = color;
+    for (let child of this.children) {
+      child.setColor(color);
+    }
   }
 
   update(ease = 0.1) {
@@ -141,6 +147,7 @@ export function treeGenerator(branches) {
         f.growthFactor,
         f.generator,
       );
+      fractal.color = f.color;
       children.push(fractal);
     }
     return children;

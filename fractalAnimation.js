@@ -6,8 +6,16 @@ const ctx = canvas.getContext("2d");
 
 // Fullscreen the canvas
 function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  // Set the display size to match window size
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
+
+  // Set the resolution to be 1/4 of the display size
+  canvas.width = window.innerWidth / 4;
+  canvas.height = window.innerHeight / 4;
+
+  // Disable image smoothing for crisp pixels
+  ctx.imageSmoothingEnabled = false;
 }
 
 resizeCanvas();
@@ -18,7 +26,7 @@ const basePoint = new Point();
 const level = 5;
 
 let branches = 4;
-const radius = 1000;
+const radius = 200;
 const generator = treeGenerator(branches);
 const growthFactor = 0.5;
 
@@ -42,7 +50,7 @@ function isValidHex(color) {
 // Function to update color
 function updateColor(newColor) {
   if (isValidHex(newColor)) {
-    fractal.color = newColor;
+    fractal.setColor(newColor);
     colorInput.classList.remove("invalid");
   } else {
     colorInput.classList.add("invalid");

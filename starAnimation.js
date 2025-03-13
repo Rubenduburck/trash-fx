@@ -5,8 +5,16 @@ const ctx = canvas.getContext("2d");
 
 // Fullscreen the canvas
 function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  // Set the display size to match window size
+  canvas.style.width = window.innerWidth + "px";
+  canvas.style.height = window.innerHeight + "px";
+
+  // Set the resolution to be 1/4 of the display size
+  canvas.width = window.innerWidth / 4;
+  canvas.height = window.innerHeight / 4;
+
+  // Disable image smoothing for crisp pixels
+  ctx.imageSmoothingEnabled = false;
 }
 
 // -----------------------------
